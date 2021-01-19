@@ -2,8 +2,8 @@ import time
 from datetime import datetime as dt
 sites_to_block = ['www.facebook.com',  'facebook.com',  'www.youtube.com', 'youtube.com','www.gmail.com', 'gmail.com']
 Linux_host = "/etc/hosts"
-Window_host = "C:\Windows\System32\drivers\etc\hosts"
-default_hoster = Window_host
+#Window_host = "C:\Windows\System32\drivers\etc\hosts"
+default_hoster = Linux_host
 redirect = "127.0.0.1"
 def block_websites(start_hour , end_hour):
     while True:

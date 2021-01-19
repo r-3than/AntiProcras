@@ -8,7 +8,11 @@ def hello():
 
 @app.route("/test/<testname>")
 def test(testname):
-    return testname
+    f = open("./test.txt","w")
+    f.write(testname)
+    f.close()
+    f=open("./test.txt","r").read()
+    return f
 
 if __name__ == '__main__':
      app.run(port=5002,debug=True)
