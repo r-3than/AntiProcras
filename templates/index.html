@@ -1,1 +1,74 @@
-<a>test</a>
+<!DOCTYPE html>
+<!-- saved from url=(0054)https://getbootstrap.com/docs/4.0/examples/jumbotron/# -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="https://getbootstrap.com/docs/4.0/assets/img/favicons/favicon.ico">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Anti Procras by Ethan Ray</title>
+    <link href="./this_files/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="./this_files/jumbotron.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <a class="navbar-brand" href="#">Anti Procras</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </nav>
+
+    <main role="main">
+      <div class="jumbotron"></div>
+      <div class="container">
+        <!-- Example row of columns -->
+        <div class="row">
+          <div class="col-md-4">
+            <h2>Work Hours</h2>
+            <p>Visit this page to edit, change or remove working hours and days these rules apply.</p>
+            <p><a class="btn btn-secondary" href="/workhours/" role="button">View Work Hours»</a></p>
+          </div>
+          <div class="col-md-4">
+            <h2>Blocked Websites</h2>
+            <p>In this page you can add or remove pages that are blocked during your working hours. </p>
+            <p><a class="btn btn-secondary" href="/websites/" role="button">View Webpages»</a></p>
+          </div>
+          <div class="col-md-4">
+            <h2>Control Panel</h2>
+            <p>Here are settings that you can play with. A masterswitch and info.</p>
+            <p><a class="btn btn-secondary" href="/controlpanel/" role="button">View details »</a></p>
+          </div>
+        </div>
+        
+        <div class="list-group">
+          <a href="#" class="list-group-item list-group-item-action active" aria-current="true">Blocked Websites</a>
+          {% for webpage in webpages %}
+          <a href="/view/{{webpage}}" class="list-group-item list-group-item-action">{{webpage}}</a>
+          {% endfor %}  
+          <a href="/websites/" class="list-group-item list-group-item-action">Edit list</a>
+        </div>
+        
+        <hr>
+
+      </div> <!-- /container -->
+
+    </main>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="./this_files/jquery-3.2.1.slim.min.js.download" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="./this_files/popper.min.js.download"></script>
+    <script src="./this_files/bootstrap.min.js.download"></script>
+  
+
+</body></html>
