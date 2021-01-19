@@ -30,6 +30,11 @@ def websites():
     f = open("blockedpages.txt").read().split("\n")
     return render_template("websites.html",webpages=f)
 
+@app.route("/workhours/")
+def workhours():
+    f = open("blockedpages.txt").read().split("\n")
+    return render_template("workhours.html",webpages=f)
+
 @app.route("/view/<page>")
 def viewPage(page):
     page = "http://"+page
