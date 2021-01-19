@@ -90,7 +90,6 @@ def block_websites():
             print("A")
             update = False
         if dt(dt.now().year, dt.now().month, dt.now().day,start_hour)< dt.now() < dt(dt.now().year, dt.now().month, dt.now().day,end_hour): 
-            print("Do the work ....")
             with open(default_hoster, 'r+') as hostfile:
                 hosts = hostfile.read()
                 for site in  sites_to_block:
@@ -104,8 +103,7 @@ def block_websites():
                     if not any(site in host for site in sites_to_block):
                         hostfile.write(host)
                 hostfile.truncate()
-            print('Good Time')
-        time.sleep(3)
+        time.sleep(10)
 
 
 
