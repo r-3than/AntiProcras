@@ -1,4 +1,4 @@
-from flask import Flask, render_template ,redirect
+from flask import Flask, render_template ,redirect,request
 
 app = Flask(__name__)
 @app.route("/")
@@ -20,8 +20,13 @@ def removeWeb(webname):
     Out.close()
     return redirect("/websites/")
 
-@app.route("/websites/")
+@app.route("/websites/",methods = ['POST', 'GET'])
 def websites():
+    if request.method == 'POST':
+        user = request.form['websitename']
+        f = open("blockedpages.txt","a")
+        f.write("\n"+user)
+        f.close()
     f = open("blockedpages.txt").read().split("\n")
     return render_template("websites.html",webpages=f)
 
