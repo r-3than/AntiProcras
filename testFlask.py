@@ -30,10 +30,23 @@ def websites():
     f = open("blockedpages.txt").read().split("\n")
     return render_template("websites.html",webpages=f)
 
-@app.route("/workhours/")
+@app.route("/workhours/",methods = ['POST', 'GET'])
 def workhours():
+    if request.method == 'POST':
+        start = request.form['starthour']
+        end = request.form['endhour']
+        f = open("state.txt","w")
+        f.write(start+"|"+end+"|1")
+        f.close()
     f = open("blockedpages.txt").read().split("\n")
-    return render_template("workhours.html",webpages=f)
+    s = open("state.txt").read().split("|")
+    return render_template("workhours.html",webpages=f,startHour=s[0],endHour=s[1])
+
+@app.route("/controlpanel/",methods = ['POST', 'GET'])
+def controlpanel():
+    f = open("blockedpages.txt").read().split("\n")
+    return render_template("controlpanel.html",webpages=f)
+
 
 @app.route("/view/<page>")
 def viewPage(page):
