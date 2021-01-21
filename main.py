@@ -109,6 +109,22 @@ def removeSite(website):
                         hostfile.write(host)
                 hostfile.truncate()
 
+def unlockall():
+    global sites
+    Linux_host = "/etc/hosts"
+    Window_host = """C:\Windows\System32\drivers\etc\hosts"""
+    if platform.system() == "Linux":
+        default_hoster = Linux_host
+    else:
+        default_hoster = Window_host
+    sites_to_block = sites
+    with open(default_hoster, 'r+') as hostfile:
+                hosts = hostfile.readlines()
+                hostfile.seek(0)
+                for host in hosts:
+                    if not any(site in host for site in sites_to_block):
+                        hostfile.write(host)
+                hostfile.truncate()
 
 
 def block_websites():
@@ -172,4 +188,4 @@ if __name__ == '__main__':
 
         #watcher = threading.Thread(target=block_websites).start()
         watcher = threading.Thread(target=block_websites).start()
-        app.run(port=80,debug=False)
+        app.run(port=5002,debug=False)
