@@ -3,13 +3,7 @@ import threading
 import time, platform
 import datetime
 import ctypes, sys
-global update
-global sites
-global times 
-sites = open("blockedpages.txt").read().split("\n")
-times = open("state.txt").read().split("|")
-update = False
-
+import string , random
 class AntiPro:
     def __init__(self):
         self.sites = open("blockedpages.txt").read().split("\n")
@@ -95,6 +89,9 @@ class AntiPro:
         f.close()
         self.times = [start,end,1]
         self.update = True
+    def getCode(self):
+        self.code = get_random_string(64)
+        return self.code
     def getTimes(self):
         return self.times
     def getSites(self):
@@ -140,7 +137,7 @@ def workhours():
 @app.route("/controlpanel/",methods = ['POST', 'GET'])
 def controlpanel():
     f = AP.getSites()
-    keyCode = Ap.getCode()
+    keyCode = AP.getCode()
     return render_template("controlpanel.html",webpages=f,code=keyCode)
 
 
@@ -153,6 +150,10 @@ def viewPage(page):
 def addWeb():
     return redirect("/")
 
+def get_random_string(length):
+    sample_letters = string.ascii_letters + string.digits + "|\/?.,<>#@;:{}[]-=+_`"
+    result_str = ''.join((random.choice(sample_letters) for i in range(length)))
+    return result_str
 
 
 def is_time_between(begin_time, end_time, check_time=None):
