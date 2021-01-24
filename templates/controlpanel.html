@@ -54,9 +54,14 @@
           <h1>Key code:</h1>
           <input type="text"  id="code" disabled value="" class="form-control disabled" placeholder="{{code}}" aria-label="code" aria-describedby="basic-addon1">
           <br>
-          <form>
-          <input type="text"  id="usercode" value="" class="form-control disabled" placeholder="Enter code" aria-label="usercode" aria-describedby="basic-addon1">
+          <form id="user" method ="post">
+          <input type="text"  name="usercode" value="" class="form-control disabled" placeholder="Enter code" aria-label="usercode" aria-describedby="basic-addon1">
           </form>
+          <br>
+          <div class="d-grid gap-2">
+            <button class="btn btn-primary" type="submit" form="user" >Unlock settings</button>
+          </div>
+          <br>
        
         
         <br>

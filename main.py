@@ -4,10 +4,18 @@ import time, platform
 import datetime
 import ctypes, sys
 import string , random
+
+def get_random_string(length):
+    sample_letters = string.ascii_letters + string.digits + "|\/?.,<>#@;:{}[]-=+_`"
+    result_str = ''.join((random.choice(sample_letters) for i in range(length)))
+    return result_str
+
+
 class AntiPro:
     def __init__(self):
         self.sites = open("blockedpages.txt").read().split("\n")
         self.times = open("state.txt").read().split("|")
+        self.code = get_random_string(64)
         Linux_host = "/etc/hosts"
         Window_host = """C:\Windows\System32\drivers\etc\hosts"""
         if platform.system() == "Linux":
@@ -15,13 +23,22 @@ class AntiPro:
         else:
             default_hoster = Window_host
         self.default_hoster = default_hoster
+        self.allowChange = False
         self.update = False
         self.running = True
+        self.timeamt = 5
     def block_websites(self):
-
+        count = 0
+        timecheck = 5
         self.update = True
         redirect = "127.0.0.1"
         while self.running:
+            if self.allowChange:
+                count = count+timecheck
+            #print(count,self.timeamt,self.allowChange)
+            if count > self.timeamt:
+                count = 0
+                self.allowChange = False
             if self.update:
                 sites_to_block = self.sites
                 start_hour = int(self.times[0])
@@ -46,26 +63,27 @@ class AntiPro:
                         if not any(site in host for site in sites_to_block):
                             hostfile.write(host)
                     hostfile.truncate()
-            time.sleep(3)
+            time.sleep(timecheck)
     def removePage(self,webname):
-        try:self.sites.remove(webname)
-        except: print("Webpage not found")
-        outdata = ""
-        for item in self.sites:
-            outdata = outdata+item+"\n"
-        outdata = outdata[:-1]
-        Out = open("blockedpages.txt","w")
-        Out.write(outdata)
-        Out.close()
-        sites_to_block = [webname]
+        if self.allowChange:
+            try:self.sites.remove(webname)
+            except: print("Webpage not found")
+            outdata = ""
+            for item in self.sites:
+                outdata = outdata+item+"\n"
+            outdata = outdata[:-1]
+            Out = open("blockedpages.txt","w")
+            Out.write(outdata)
+            Out.close()
+            sites_to_block = [webname]
 
-        with open(self.default_hoster, 'r+') as hostfile:
-                    hosts = hostfile.readlines()
-                    hostfile.seek(0)
-                    for host in hosts:
-                        if not any(site in host for site in sites_to_block):
-                            hostfile.write(host)
-                    hostfile.truncate()
+            with open(self.default_hoster, 'r+') as hostfile:
+                        hosts = hostfile.readlines()
+                        hostfile.seek(0)
+                        for host in hosts:
+                            if not any(site in host for site in sites_to_block):
+                                hostfile.write(host)
+                        hostfile.truncate()
         return self.sites
     def addPage(self,webname):
         self.sites.append(webname)
@@ -75,23 +93,29 @@ class AntiPro:
         self.update = True
         return self.sites
     def unlockall(self):
-        sites_to_block = self.sites
-        with open(self.default_hoster, 'r+') as hostfile:
-                    hosts = hostfile.readlines()
-                    hostfile.seek(0)
-                    for host in hosts:
-                        if not any(site in host for site in sites_to_block):
-                            hostfile.write(host)
-                    hostfile.truncate()
+        if self.allowChange:
+            sites_to_block = self.sites
+            with open(self.default_hoster, 'r+') as hostfile:
+                        hosts = hostfile.readlines()
+                        hostfile.seek(0)
+                        for host in hosts:
+                            if not any(site in host for site in sites_to_block):
+                                hostfile.write(host)
+                        hostfile.truncate()
     def setHours(self,start,end):
-        f = open("state.txt","w")
-        f.write(start+"|"+end+"|1")
-        f.close()
-        self.times = [start,end,1]
-        self.update = True
+        if self.allowChange:
+            f = open("state.txt","w")
+            f.write(start+"|"+end+"|1")
+            f.close()
+            self.times = [start,end,1]
+            self.update = True
     def getCode(self):
         self.code = get_random_string(64)
         return self.code
+    def checkCode(self,code):
+        if self.code == code:
+            self.timeamt = 60
+            self.allowChange = True
     def getTimes(self):
         return self.times
     def getSites(self):
@@ -103,6 +127,7 @@ class AntiPro:
         self.running = False
         self.update = False
         self.unlockall()
+
 AP = AntiPro()
 app = Flask(__name__)
 
@@ -136,8 +161,17 @@ def workhours():
 
 @app.route("/controlpanel/",methods = ['POST', 'GET'])
 def controlpanel():
+    if request.method == 'POST':
+        code = request.form['usercode']
+        print(code)
+        AP.checkCode(code)
+        
+    if AP.allowChange == True:
+        keyCode = "Key accepted!"
+    else:
+        keyCode = AP.getCode()
     f = AP.getSites()
-    keyCode = AP.getCode()
+    
     return render_template("controlpanel.html",webpages=f,code=keyCode)
 
 
@@ -150,10 +184,7 @@ def viewPage(page):
 def addWeb():
     return redirect("/")
 
-def get_random_string(length):
-    sample_letters = string.ascii_letters + string.digits + "|\/?.,<>#@;:{}[]-=+_`"
-    result_str = ''.join((random.choice(sample_letters) for i in range(length)))
-    return result_str
+
 
 
 def is_time_between(begin_time, end_time, check_time=None):
