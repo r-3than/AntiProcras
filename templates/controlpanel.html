@@ -12,7 +12,7 @@
     
     <link rel="stylesheet" href="{{ url_for('static', filename='bs/css/bootstrap.min.css') }}" />
     <script src="{{ url_for('static', filename='bs/js/bootstrap.min.js') }}"></script>
-    <script src= "{{ url_for('static', filename='myjs/workhours.js') }}"></script>
+    <script src= "{{ url_for('static', filename='myjs/controlpanel.js') }}"></script>
     
 
     <!-- Custom styles for this template -->
@@ -50,7 +50,7 @@
           </div>
         </div>
         <br>
-        <div class="container">
+        <div class="container" onmouseleave="hide('test');">
           <h1>Key code:</h1>
           <input type="text"  id="code" disabled value="" class="form-control disabled" placeholder="{{code}}" aria-label="code" aria-describedby="basic-addon1">
           <br>
