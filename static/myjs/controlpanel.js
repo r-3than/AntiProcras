@@ -1,1 +1,3 @@
-function hide(val){document.getElementById('code').value="Locked mouse left container!";}
+var myElement =document.getElementById('code');
+function hide(val){document.getElementById('code').placeholder="Locked mouse left container!";}
+

@@ -27,17 +27,18 @@ class AntiPro:
         self.update = False
         self.running = True
         self.timeamt = 5
+        self.count = 0
     def block_websites(self):
-        count = 0
+        
         timecheck = 5
         self.update = True
         redirect = "127.0.0.1"
         while self.running:
             if self.allowChange:
-                count = count+timecheck
+                self.count = self.count+timecheck
             #print(count,self.timeamt,self.allowChange)
-            if count > self.timeamt:
-                count = 0
+            if self.count > self.timeamt:
+                self.count = 0
                 self.allowChange = False
             if self.update:
                 sites_to_block = self.sites
@@ -110,11 +111,17 @@ class AntiPro:
             self.times = [start,end,1]
             self.update = True
     def getCode(self):
-        self.code = get_random_string(64)
+        if is_time_between(datetime.time(int(self.times[0]),0), datetime.time(int(self.times[1]),00)): 
+            self.code = get_random_string(32)
+        else:
+            self.code = "entered correctly"
+            self.timeamt = 60*5
+            self.allowChange = True
         return self.code
     def checkCode(self,code):
         if self.code == code:
-            self.timeamt = 60
+            self.code = "entered correctly"
+            self.timeamt = 60*5
             self.allowChange = True
     def getTimes(self):
         return self.times
@@ -167,7 +174,7 @@ def controlpanel():
         AP.checkCode(code)
         
     if AP.allowChange == True:
-        keyCode = "Key accepted!"
+        keyCode = "Key accepted! Time left:" +str(AP.timeamt-AP.count)
     else:
         keyCode = AP.getCode()
     f = AP.getSites()

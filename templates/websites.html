@@ -3,9 +3,9 @@
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="https://getbootstrap.com/docs/4.0/assets/img/favicons/favicon.ico">
+    <meta name="description" content="Your anti Procras tool!">
+    <meta name="author" content="Ethan Ray">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     
     
@@ -21,10 +21,12 @@
   <body>
 
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a class="navbar-brand" href="/">Anti Procras</a>
+      <a class="navbar-brand" href="/">  Anti Procras</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+      <div class="form-inline my-2 my-lg-0">
+      <a href="https://www.paypal.com/donate?business=ethan.gregory.ray%40gmail.com&item_name=Developing+this+anti+procrastinate+tool%21&currency_code=GBP"><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Donate</button></a>
     </nav>
 
     <main role="main">
@@ -65,6 +67,9 @@
           <a href="/remove/{{webpage}}" class="list-group-item list-group-item-action">{{webpage}}</a>
           {% endfor %}  
         </div>
+        <br>
+          <p>Made by Ethan Ray 2021</p>
+        <br>
         
         <hr>
 
