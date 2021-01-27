@@ -1,0 +1,8 @@
+ * Running on http://127.0.0.1:5002/ (Press CTRL+C to quit)
+127.0.0.1 - - [27/Jan/2021 01:55:25] "[37mGET /controlpanel/ HTTP/1.1[0m" 200 -
+127.0.0.1 - - [27/Jan/2021 01:55:25] "[37mGET /static/favicon.ico HTTP/1.1[0m" 200 -
+127.0.0.1 - - [27/Jan/2021 01:55:26] "[37mGET /controlpanel/ HTTP/1.1[0m" 200 -
+127.0.0.1 - - [27/Jan/2021 01:55:26] "[37mGET /static/favicon.ico HTTP/1.1[0m" 200 -
+127.0.0.1 - - [27/Jan/2021 01:55:27] "[37mGET /workhours/ HTTP/1.1[0m" 200 -
+127.0.0.1 - - [27/Jan/2021 01:55:28] "[37mGET /websites/ HTTP/1.1[0m" 200 -
+127.0.0.1 - - [27/Jan/2021 01:55:29] "[37mGET /controlpanel/ HTTP/1.1[0m" 200 -
