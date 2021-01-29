@@ -1,0 +1,4 @@
+Add days seperate controls
+better url mapping
+switch over to google protobuf
+make async? (look int)
