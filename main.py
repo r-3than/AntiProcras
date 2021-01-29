@@ -160,13 +160,25 @@ def websites():
 
 @app.route("/workhours/",methods = ['POST', 'GET'])
 def workhours():
+    day = datetime.datetime.now().strftime("%A")
     if request.method == 'POST':
         start = request.form['starthour']
         end = request.form['endhour']
         AP.setHours(start,end)
     f = AP.getSites()
     s = AP.getTimes()
-    return render_template("workhours.html",webpages=f,startHour=s[0],endHour=s[1])
+    return render_template("workhours.html",webpages=f,startHour=s[0],endHour=s[1],day=day)
+
+@app.route("/workhours/<day>",methods = ['POST', 'GET'])
+def workhoursday(day):
+    if request.method == 'POST':
+        start = request.form['starthour']
+        end = request.form['endhour']
+        AP.setHours(start,end)
+    f = AP.getSites()
+    s = AP.getTimes()
+    return render_template("workhours.html",webpages=f,startHour=s[0],endHour=s[1],day=day)
+
 
 @app.route("/controlpanel/",methods = ['POST', 'GET'])
 def controlpanel():

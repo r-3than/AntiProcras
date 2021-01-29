@@ -53,14 +53,18 @@
         </div>
         <br>
         <div class="container">
-          <button type="button" class="btn btn-outline-primary">Primary</button>
-          <button type="button" class="btn btn-outline-secondary">Secondary</button>
-          <button type="button" class="btn btn-outline-success">Success</button>
-          <button type="button" class="btn btn-outline-danger">Danger</button>
-          <button type="button" class="btn btn-outline-warning">Warning</button>
-          <button type="button" class="btn btn-outline-info">Info</button>
-          <button type="button" class="btn btn-outline-light">Light</button>
-          <button type="button" class="btn btn-outline-dark">Dark</button>
+          <div class="d-flex justify-content-center mt-auto"> 
+            <div class="mt-auto p-2"> <a href="Monday"><button type="button" class="btn btn-outline-dark" >Monday</button></a> </div>
+            <div class="mt-auto p-2"> <a href="Tuesday"><button type="button" class="btn btn-outline-dark" >Tuesday</button></a> </div>
+            <div class="mt-auto p-2"> <a href="Wednesday"><button type="button" class="btn btn-outline-dark" >Wednesday</button></a> </div>
+            <div class="mt-auto p-2"> <a href="Thursday"><button type="button" class="btn btn-outline-dark" >Thursday</button></a> </div>
+            <div class="mt-auto p-2"> <a href="Friday"><button type="button" class="btn btn-outline-dark" >Friday</button></a> </div>
+            <div class="mt-auto p-2"> <a href="Saturday"><button type="button" class="btn btn-outline-dark" >Saturday</button></a> </div>
+            <div class="mt-auto p-2"> <a href="Sunday"><button type="button" class="btn btn-outline-dark" >Sunday</button></a> </div>
+          </div>
+
+          <br>
+          <h2>Currently viewing...{{day}}</h2>
           <form id="updateTime" action="/workhours/" method ="post">
           <div class="input-group mb-3">
           <label for="StartHour" class="form-label">Start Hour</label> 
