@@ -87,6 +87,8 @@ class AntiPro:
                         hostfile.truncate()
         return self.sites
     def addPage(self,webname):
+        if "//" in webname:
+            webname =webname.split("/")[2]
         self.sites.append(webname)
         f = open("blockedpages.txt","a")
         f.write("\n"+webname)
